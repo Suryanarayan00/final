@@ -1,8 +1,10 @@
-import React, { Component } from "react"
+import React, { Component } from "react";
 import { View, Text, StyleSheet, SafeAreaView, ScrollView, Image, TouchableOpacity } from "react-native"
-import DealCard from "../../../Component/DealCard"
-import ShoppingCard from "../../../Component/ShoppingCard"
+
+import DealCard from "../../../Components/DealCard";
+import ShoppingCard from "../../../Components/ShoppingCard";
 import data from "../../../constants/data"
+
 
 export default class LatestDeals extends Component {
 

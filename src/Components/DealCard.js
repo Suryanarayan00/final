@@ -25,7 +25,7 @@ export default function DealCard(props) {
             data={data}
             numColumns={2}
             renderItem={_renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={(item, index) => index}
         />
 
     )

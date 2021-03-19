@@ -1,8 +1,9 @@
-import React, { Component } from "react"
+import React, { Component } from "react";
 import { View, Image, Button, TouchableOpacity, Text, SafeAreaView, StyleSheet } from "react-native"
-import { ScrollView } from "react-native-gesture-handler"
-import CartCard from "../../../Component/CartCard"
-import imagePath from "../../../constants/imagePath"
+import { ScrollView } from "react-native-gesture-handler";
+import CartCard from "../../../Components/CartCard";
+import imagePath from "../../../constants/imagePath";
+
 
 export default class Cart extends Component {
 

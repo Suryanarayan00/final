@@ -2,7 +2,8 @@ import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import navigationStrings from '../constants/navigationStrings';
-import { Accounts, Cart, Home, Sports } from '../Screens';
+import { Cart, Home, LatestDeals, Profile } from '../Screens';
+
 
 
 
@@ -21,7 +22,7 @@ export default function BottomTabNavigator() {
                 options={{ tabBarLabel: 'Home', tabBarIcon: ({ color }) => (<MaterialCommunityIcons name='home' color={color} size={26} />) }}
             />
 
-            <Tab.Screen name={navigationStrings.SPORT} component={Sports}
+            <Tab.Screen name={navigationStrings.DEAL} component={LatestDeals}
                 options={{
                     tabBarLabel: 'Deals',
                     tabBarIcon: ({ color }) => (
@@ -37,7 +38,7 @@ export default function BottomTabNavigator() {
                     ),
                 }} />
 
-            <Tab.Screen name={navigationStrings.ACCOUNTS} component={Accounts}
+            <Tab.Screen name={navigationStrings.PROFILE} component={Profile}
                 options={{
                     tabBarLabel: 'Profile',
                     tabBarIcon: ({ color }) => (

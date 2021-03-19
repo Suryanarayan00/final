@@ -1,4 +1,8 @@
 export default {
+  MAIN: 'main',
+  DEAL: 'deal',
+  PROFILE: 'profile',
+  ORDER_DETAIL: 'orderDetail',
   LOGIN: 'login',
   OTP_VERIFICATION: 'otpVerfication',
   OUTER_SCREEN: 'outerScreen',

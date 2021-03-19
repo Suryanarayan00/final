@@ -1,8 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import BorderTextInput from '../../Components/BorderTextInput';
-import ButtonWithLoader from '../../Components/ButtonWithLoader';
+import React, { Component } from 'react';
+import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import GradientButton from '../../Components/GradientButton';
 import WrapperContainer from '../../Components/WrapperContainer';
 import strings from '../../constants/lang';
@@ -10,115 +8,148 @@ import {
   moderateScaleVertical,
   moderateScale,
 } from '../../styles/responsiveSize';
-import styles from './styles';
-import {otpTimerCounter} from '../../utils/helperFunctions';
 import colors from '../../styles/colors';
-import fontFamily from '../../styles/fontFamily';
-import imagePath from '../../constants/imagePath';
 import navigationStrings from '../../constants/navigationStrings';
 import TextInputWithLabel from '../../Components/TextInputWithLabel';
-import actions from '../../redux/actions/index';
+import imagePath from '../../constants/imagePath';
+import styles from '../Signup/styles';
+import fontFamily from '../../styles/fontFamily';
+import auth from '../../redux/reducers/auth';
 
-export default function OtpVerification({navigation}) {
-  const [state, setState] = useState({
+
+
+
+export default class Login extends Component {
+  state = {
+    name: '',
     email: '',
     password: '',
-  });
-  const updateState = data => setState(state => ({...state, ...data}));
+    isLoading: false,
+  }
 
-  const moveToNewScreen = (screenName, data) => () => {
-    navigation.navigate(screenName, {});
-  };
+  submit = () => {
+    let { email, password } = this.state
+    if (email && password) {
+      this.setState({
+        isLoading: true,
+      })
+      apis.login({
+        email: email,
+        password: password,
 
-  const _onLogin = () => {
-    // actions.login({
-    //   email:"ha@hyp.com",
-    //   pwd:'122132'
-    // }).then(res=>{
+      }).then(res => {
+        console.log('entered...............into ..............login')
+        console.log(JSON.stringify(res))
+        this.setState({
+          isLoading: false
+        })
+        this.props.navigation.navigate(navigationStrings.MAIN)
+      }).catch(error => {
+        console.log(error)
+        this.setState({
+          isLoading: false
+        })
+      })
+    }
+  }
 
-    // })
-    navigation.navigate(navigationStrings.OTP_VERIFICATION);
-  };
-  const {timer} = state;
-  return (
-    <WrapperContainer>
-      <View
-        style={{
-          height: moderateScaleVertical(80),
-          borderBottomColor: colors.borderLight,
-          paddingHorizontal: moderateScale(24),
-          justifyContent: 'center',
-          borderBottomWidth: 2,
-        }}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack(null)}
-          style={{alignSelf: 'flex-start'}}>
-          <Image source={imagePath.back} />
-        </TouchableOpacity>
-      </View>
-      <KeyboardAwareScrollView
-        showsVerticalScrollIndicator={false}
-        style={{
-          flex: 1,
 
-          marginHorizontal: moderateScale(24),
-        }}>
-        <View style={{height: moderateScaleVertical(48)}} />
-        <Text style={styles.header}>{strings.LOGIN_YOUR_ACCOUNT}</Text>
-        <Text style={styles.txtSmall}>{strings.ENTE_REGISTERED_EMAIL}</Text>
-        <View style={{height: moderateScaleVertical(50)}} />
-        <BorderTextInput placeholder={strings.YOUR_EMAIL} />
-        <BorderTextInput placeholder={strings.ENTER_PASSWORD} />
 
-        <TextInputWithLabel label="Email" placeholder="Enter your email" />
+  onChange = (key) => {
+    return (value) => {
+      this.setState({
+        [key]: value,
+      });
+    };
+  }
 
-        <GradientButton
-          containerStyle={{marginTop: moderateScaleVertical(10)}}
-          onPress={_onLogin}
-          btnText={strings.LOGIN_ACCOUNT}
-        />
 
-        <ButtonWithLoader
-          containerStyle={{marginTop: moderateScaleVertical(10)}}
-          onPress={_onLogin}
-          btnText={strings.LOGIN_ACCOUNT}
-        />
-        {/* <View style={{marginTop: moderateScaleVertical(50)}}>
-          <View style={styles.socialRow}>
-            <View style={styles.hyphen} />
-            <Text style={styles.orText}>{strings.OR_LOGIN_WITH}</Text>
-            <View style={styles.hyphen} />
-          </View>
-          <View style={styles.socialRowBtn}>
-            <TouchableOpacity>
-              <Image source={imagePath.google} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Image source={imagePath.fb} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Image source={imagePath.insta} />
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <Image source={imagePath.apple} />
-            </TouchableOpacity>
-          </View>
-        </View> */}
-        <View style={styles.bottomContainer}>
-          <Text style={{...styles.txtSmall, color: colors.textGreyLight}}>
-            {strings.DID_NOT_HAVE_AN_ACCOUNT}
-            <Text
-              // onPress={moveToNewScreen(navigationStrings.SIGN_UP)}
-              style={{
-                color: colors.themeColor,
-                fontFamily: fontFamily.futuraBtHeavy,
-              }}>
-              {' '}
-              {strings.SIGN_UP}
-            </Text>
-          </Text>
+
+  render() {
+    return (
+      <WrapperContainer>
+        <View
+          style={{
+            height: moderateScaleVertical(80),
+            paddingHorizontal: moderateScale(24),
+            justifyContent: 'center',
+          }}>
+
+          <TouchableOpacity onPress={() => this.props.navigation.goBack(null)}>
+
+            <View style={style.inline}>
+              <Image source={imagePath.back} style={style.leftArrow} />
+              <Text style={style.fixedTopCenter}>Login</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-      </KeyboardAwareScrollView>
-    </WrapperContainer>
-  );
+        <KeyboardAwareScrollView
+          showsVerticalScrollIndicator={false}
+          style={{
+            flex: 1,
+
+            marginHorizontal: moderateScale(24),
+          }}>
+          <View style={{ height: moderateScaleVertical(48) }} />
+          <Text style={styles.header}>{strings.FLIPKART}</Text>
+          <Text style={styles.txtSmall}>{strings.WELCOME_NOTE}</Text>
+          <View style={{ height: moderateScaleVertical(50) }} />
+
+
+
+          <View style={{ paddingVertical: 20, width: '100%', }}>
+            <TextInputWithLabel label="Name" onChangeText={this.onChange('name')} placeholder="Enter your name" />
+            <TextInputWithLabel label="Email/Phone" keyboardType='email-address' onChangeText={this.onChange('email')} placeholder="Enter your email/phone" />
+            <TextInputWithLabel password={true} secureTextEntry={true} label="Password" onChangeText={this.onChange('password')} placeholder="Enter your password" />
+          </View>
+
+
+          <GradientButton
+            containerStyle={{ marginTop: moderateScaleVertical(10) }}
+            onPress={() => this.props.navigation.navigate(navigationStrings.MAIN)}
+            btnText={strings.LOGIN_ACCOUNT}
+          />
+          <View style={styles.bottomContainer}>
+            <Text style={{ ...styles.txtSmall, color: colors.textGreyLight }}>
+              {strings.DID_NOT_HAVE_AN_ACCOUNT}
+              <Text
+                // onPress={moveToNewScreen(navigationStrings.SIGN_UP)}
+                style={{
+                  color: colors.themeColor,
+                  fontFamily: fontFamily.futuraBtHeavy,
+                }}>
+                {' '}
+                {strings.SIGN_UP}
+              </Text>
+            </Text>
+          </View>
+        </KeyboardAwareScrollView>
+      </WrapperContainer>
+    )
+  }
+
 }
+
+
+
+const style = StyleSheet.create({
+  leftArrow: {
+    zIndex: 5,
+    borderRadius: 30,
+    tintColor: colors.spanColor,
+    width: 30,
+    height: 30
+  },
+  fixedTopCenter: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    position: 'absolute',
+    width: '100%',
+    textAlign: 'center'
+  },
+  inline: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  }
+})

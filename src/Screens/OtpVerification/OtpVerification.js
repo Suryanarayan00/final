@@ -124,7 +124,6 @@ export default function OtpVerification({navigation}) {
             <Text style={{...styles.txtSmall, color: colors.textGreyLight}}>
               {strings.DIDNT_GET_OTP}
               <Text
-                onPress={_onResend}
                 style={{
                   color: colors.themeColor,
                   fontFamily: fontFamily.futuraBtHeavy,

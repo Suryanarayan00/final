@@ -1,4 +1,6 @@
 export default {
+    FLIPKART: 'Flipkart',
+    WELCOME_NOTE: 'Welcome Back to the Flipkart. You just think, I Will deliver you to your doorstep.',
     LOGIN: 'Login to your account',
     JOIN_US_FOR_SHOPPING: 'Join us for Shopping. Login with your account and enjoy the Shopping from Home.',
     CREATE_YOUR_ACCOUNT:'Create your account',
@@ -25,7 +27,7 @@ export default {
     RESEND_CODE:"Resend Code",
     RESEND_CODE_IN:'Resend code in ',
     LOGIN_YOUR_ACCOUNT:'Login Your Account',
-    ENTE_REGISTERED_EMAIL:"Enter registered email and password to login your account",
+    ENTE_REGISTERED_EMAIL:"Enter registered email/phone and password to login your account",
     LOGIN_ACCOUNT:"LOGIN ACCOUNT",
     DID_NOT_HAVE_AN_ACCOUNT:`Didn't have an account?`,
     SIGN_UP:'Signup',

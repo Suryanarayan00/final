@@ -33,7 +33,7 @@ export const updateInternetConnection = (data) => {
 };
 
 export const login = (data) => {
-  console.log(data, 'the geiv ndart');
+  console.log(data, 'the geivn dart');
   return new Promise((resolve, reject) => {
     apiPost(LOGIN_API, data)
       .then((res) => {

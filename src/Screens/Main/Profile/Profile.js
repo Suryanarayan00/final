@@ -2,8 +2,8 @@ import React, { Component } from "react"
 import { View, Text, SafeAreaView, Alert, Image, StyleSheet, ScrollView, TouchableOpacity } from "react-native"
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import ProfileBodyCard from "../../../Component/ProfileBodyCard";
-import * as ImagePicker from 'expo-image-picker';
+// import * as ImagePicker from 'expo-image-picker';
+import ProfileBodyCard from "../../../Components/ProfileBodyCard";
 
 
 
@@ -56,57 +56,7 @@ export default class Profile extends Component {
 
 
 
-    selectImage = () => {
-        Alert.alert(
-            "Profile Image",
-            "Select appropriate Image for your Profile",
-            [
-                {
-                    text: "Cancel",
-                    style: "cancel"
-                },
-                {
-                    text: "Gallery",
-                    onPress: this.getImageUsingGallery,
-                },
-                {
-                    text: "Camera",
-                    onPress: this.getImageUsingCamera
-                }
-            ],
-            { cancelable: false }
-        );
-    }
-
-
-    getImageUsingCamera = async () => {
-        let picker = await ImagePicker.launchCameraAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            quality: 1
-        })
-        if (picker.cancelled === true) {
-            return;
-        }
-        this.setState({
-            selectedImage: picker.uri
-        })
-    }
-
-    getImageUsingGallery = async () => {
-        let picker = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            quality: 1
-        })
-        if (picker.cancelled === true) {
-            return;
-        }
-        this.setState({
-            selectedImage: picker.uri
-        })
-
-    }
+    
 
     render() {
         let { profileDetail, selectedImage } = this.state
@@ -114,7 +64,7 @@ export default class Profile extends Component {
             <SafeAreaView style={style.container}>
                 <ScrollView>
                     <View style={style.profile}>
-                        <TouchableOpacity onPress={this.selectImage}>
+                        <TouchableOpacity >
                             <FontAwesome size={20} name="edit" style={{ position: 'absolute', right: 0, color: 'white', bottom: 0, zIndex: 23 }} />
                             <Image style={style.profileImage} source={{ uri: selectedImage }} />
                         </TouchableOpacity>

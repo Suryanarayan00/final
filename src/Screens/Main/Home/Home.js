@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { View, StyleSheet, TextInput, TouchableOpacity, Text, Image, SafeAreaView, ScrollView } from 'react-native';
-import { CategoryIcon } from '../..';
+
+import ShoppingCard from '../../../Components/ShoppingCard';
+import MyCarousel from '../../../Components/Carousel';
+import CategoryIcon from '../../../Components/CategoryIcon';
 import data from '../../../constants/data';
 import imagePath from '../../../constants/imagePath';
 import navigationStrings from '../../../constants/navigationStrings';
-import ShoppingCard from '../../../Components/ShoppingCard';
-import MyCarousel from '../../../Components/Carousel';
 
 
 
@@ -67,7 +68,7 @@ export default class Home extends Component {
           </View>
           <View style={{ display: 'flex', flexDirection: 'row' }}>
             <TouchableOpacity><FontAwesome name='bell' size={17} color='white' style={{ paddingRight: 8, paddingTop: 4 }} /></TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('cart', { data: cardData })}>{count ? <Text style={style.cart}>{this.state.count}</Text> : null}<FontAwesome name='shopping-cart' size={20} color='white' style={{ paddingRight: 13 }} /></TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate(navigationStrings.CART, { data: cardData })}>{count ? <Text style={style.cart}>{this.state.count}</Text> : null}<FontAwesome name='shopping-cart' size={20} color='white' style={{ paddingRight: 13 }} /></TouchableOpacity>
           </View>
         </View>
 

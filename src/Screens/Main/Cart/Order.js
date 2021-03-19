@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, Share, Button, Text, View, Image, TouchableOpacity } from 'react-native';
-import imagePath from '../../../constants/imagePath';
 import Communications from 'react-native-communications';
 import openMap from 'react-native-open-maps';
+import imagePath from '../../../constants/imagePath';
 
 
 
