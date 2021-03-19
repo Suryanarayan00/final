@@ -44,10 +44,6 @@ export default function OtpVerification({navigation}) {
     };
   }, [state.timer]);
 
-  //RESTING THE TIMER AND REQUEST FOR NEW OTP
-  const _onResend = () => {
-    updateState({timer: 120});
-  };
 
   const onChangeOtp = otp => {
     updateState({otp});
@@ -61,7 +57,9 @@ export default function OtpVerification({navigation}) {
 
   const onVerifyOtp = () => {
     const {otp} = state;
-    alert(otp);
+    if(otp.length<4)
+      alert('Please enter otp First',otp);
+    else navigation.navigate(navigationStrings.LOGIN)
   };
 
   const {timer} = state;

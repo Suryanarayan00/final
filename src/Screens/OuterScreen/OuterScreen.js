@@ -9,13 +9,13 @@ import {
   moderateScale,
 } from '../../styles/responsiveSize';
 import strings from '../../constants/lang/index';
-import fontFamily from '../../styles/fontFamily';
 import GradientButton from '../../Components/GradientButton';
 import ButtonWithLoader from '../../Components/ButtonWithLoader';
-import imagePath from '../../constants/imagePath';
 import styles from './styles';
 import navigationStrings from '../../constants/navigationStrings';
-import isJs from 'is_js';
+// import isJs from 'is_js';
+// import imagePath from '../../constants/imagePath';
+// import fontFamily from '../../styles/fontFamily';
 
 export default function OuterScreen({navigation}) {
   const moveToNewScreen = (screenName, data = {}) => () => {
@@ -24,41 +24,20 @@ export default function OuterScreen({navigation}) {
   return (
     <WrapperContainer>
       <View style={{marginTop: moderateScaleVertical(100), flex: 1}}>
-        <Text style={styles.header}>{strings.CREATE_YOUR_ACCOUNT}</Text>
+        <Text style={styles.header}>{strings.LOGIN_YOUR_ACCOUNT}</Text>
         <View style={{marginHorizontal: moderateScale(24)}}>
-          <Text style={styles.txtSmall}>{strings.JOIN_US_FOR_EMERGENCY}</Text>
+          <Text style={styles.txtSmall}>{strings.JOIN_US_FOR_SHOPPING}</Text>
           <GradientButton
-            containerStyle={{marginTop: moderateScaleVertical(50)}}
-            btnText={strings.CREATE_AN_ACCOUNT}
-            onPress={moveToNewScreen(navigationStrings.SIGN_UP)}
+            containerStyle={{marginTop: moderateScaleVertical(160)}}
+            btnText={strings.LOGIN_USING_PHONE}
+            onPress={moveToNewScreen(navigationStrings.OTP_VERIFICATION)}
           />
-          <ButtonWithLoader
-            btnStyle={styles.guestBtn}
-            btnTextStyle={{color: colors.textBlue}}
-            onPress={moveToNewScreen(navigationStrings.SIGN_UP)}
-            btnText={strings.GUEST_LOGIN}
+          <GradientButton
+            containerStyle={{marginTop: moderateScaleVertical(25)}}
+            btnText={strings.LOGIN_USING_PHONE}
+            onPress={moveToNewScreen(navigationStrings.OTP_VERIFICATION)}
           />
-          <View style={{marginTop: moderateScaleVertical(50)}}>
-            <View style={styles.socialRow}>
-              <View style={styles.hyphen} />
-              <Text style={styles.orText}>{strings.OR_SIGNUP_WITH}</Text>
-              <View style={styles.hyphen} />
-            </View>
-            <View style={styles.socialRowBtn}>
-              <TouchableOpacity>
-                <Image source={imagePath.google} />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image source={imagePath.fb} />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image source={imagePath.insta} />
-              </TouchableOpacity>
-              <TouchableOpacity>
-                <Image source={imagePath.apple} />
-              </TouchableOpacity>
-            </View>
-          </View>
+          
         </View>
         <View style={styles.bottomContainer}>
           <View
@@ -68,12 +47,12 @@ export default function OuterScreen({navigation}) {
               justifyContent: 'center',
             }}>
             <Text style={[styles.txtSmall, styles.alreadyText]}>
-              {strings.ALREADY_HAVE_AN_ACCOUNT}
+              {strings.DID_NOT_HAVE_AN_ACCOUNT}
             </Text>
             <TouchableOpacity
               hitSlop={hitSlopProp}
               onPress={moveToNewScreen(navigationStrings.LOGIN)}>
-              <Text style={styles.login}> {strings.LOGIN}</Text>
+              <Text style={styles.login}> {strings.SIGN_UP}</Text>
             </TouchableOpacity>
           </View>
         </View>

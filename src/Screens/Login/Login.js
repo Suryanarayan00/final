@@ -83,7 +83,7 @@ export default function OtpVerification({navigation}) {
           onPress={_onLogin}
           btnText={strings.LOGIN_ACCOUNT}
         />
-        <View style={{marginTop: moderateScaleVertical(50)}}>
+        {/* <View style={{marginTop: moderateScaleVertical(50)}}>
           <View style={styles.socialRow}>
             <View style={styles.hyphen} />
             <Text style={styles.orText}>{strings.OR_LOGIN_WITH}</Text>
@@ -103,12 +103,12 @@ export default function OtpVerification({navigation}) {
               <Image source={imagePath.apple} />
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
         <View style={styles.bottomContainer}>
           <Text style={{...styles.txtSmall, color: colors.textGreyLight}}>
-            {strings.ALREADY_HAVE_AN_ACCOUNT}
+            {strings.DID_NOT_HAVE_AN_ACCOUNT}
             <Text
-              onPress={moveToNewScreen(navigationStrings.SIGN_UP)}
+              // onPress={moveToNewScreen(navigationStrings.SIGN_UP)}
               style={{
                 color: colors.themeColor,
                 fontFamily: fontFamily.futuraBtHeavy,

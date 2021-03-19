@@ -14,7 +14,7 @@ export default function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {MainStack()}
+        {/* {MainStack()} */}
         {AuthStack(Stack)}
       </Stack.Navigator>
     </NavigationContainer>

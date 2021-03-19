@@ -1,5 +1,9 @@
 export default {
+    LOGIN: 'Login to your account',
+    JOIN_US_FOR_SHOPPING: 'Join us for Shopping. Login with your account and enjoy the Shopping from Home.',
     CREATE_YOUR_ACCOUNT:'Create your account',
+    LOGIN_USING_PHONE: 'Login using phone',
+    LOGIN_USING_EMAIL: 'Login using email',
     JOIN_US_FOR_EMERGENCY:"Join us for medical  emergency. Create a  free account and join us!",
     CREATE_AN_ACCOUNT:"CREATE NEW ACCOUNT",
     GUEST_LOGIN:"GUEST LOGIN",
