@@ -14,7 +14,12 @@ import TextInputWithLabel from '../../Components/TextInputWithLabel';
 import imagePath from '../../constants/imagePath';
 import styles from '../Signup/styles';
 import fontFamily from '../../styles/fontFamily';
-import auth from '../../redux/reducers/auth';
+import { userContext } from '../../Context/Context';
+
+
+
+import { connect } from 'react-redux';
+// import actions from '../../redux/actions';
 
 
 
@@ -26,6 +31,64 @@ export default class Login extends Component {
     password: '',
     isLoading: false,
   }
+
+
+  static contextType = userContext;
+  isValidate = () => {
+    const { email, password } = this.state;
+    // let data=
+    let check = validations({
+      email: email,
+      password: password,
+    });
+    if (check) {
+      showMessage({
+        message: check,
+        type: 'danger',
+        icon: 'danger',
+      });
+      return false;
+    }
+
+    // alert("false")
+    return true;
+    // console.log(check)
+  };
+  loginApi = () => {
+
+    actions.saveUserData({
+      name: "Giriraj",
+      office: 'codebrew'
+    });
+
+    // return;
+    const { email, password, isvalide } = this.state;
+    if (this.isValidate()) {
+      this.setState({
+        isvalide: true,
+      });
+      apis
+        .login({ email, password })
+        .then((response) => {
+          this.context.onLogin();
+          // this.props.navigation.navigate(navigationStrings.TAB_ROUTES)
+          showMessage({
+            type: 'success',
+            icon: 'success',
+            message: 'Successfully Login',
+          });
+        })
+        .catch((error) => {
+          this.setState({ isLoading: false });
+          showMessage({
+            type: 'danger',
+            icon: 'danger',
+            message: error.message,
+          });
+          console.log(error + 'here');
+        });
+    }
+  };
 
   submit = () => {
     let { email, password } = this.state

@@ -2,38 +2,53 @@ import React, { Component } from 'react';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { View, StyleSheet, TextInput, TouchableOpacity, Text, Image, SafeAreaView, ScrollView } from 'react-native';
-
+import {connect} from 'react-redux';
 import ShoppingCard from '../../../Components/ShoppingCard';
 import MyCarousel from '../../../Components/Carousel';
 import CategoryIcon from '../../../Components/CategoryIcon';
 import data from '../../../constants/data';
 import imagePath from '../../../constants/imagePath';
 import navigationStrings from '../../../constants/navigationStrings';
+import store from '../../../redux/store';
+import types from '../../../redux/types';
+import fontFamily from '../../../styles/fontFamily';
 
 
 
 
-export default class Home extends Component {
+class Home extends Component {
 
   state = {
     count: 0,
-    cardData: []
   }
 
 
 
   // add item to cart
   addToCart = (value) => {
-    let { cardData } = this.state
+ 
+    console.log(store.getState().shopping);
+    let {cardData} = store.getState().shopping;
+    console.log(cardData)
     let index = cardData.findIndex((item) => item.id == value.id)
     if ((index != -1)) {
-      cardData[index].num = cardData[index].num + 1
-      this.setState({ cardData: cardData })
+      // cardData[index].num = cardData[index].num + 1
+      // this.setState({ cardData: cardData })
+      store.dispatch({
+        type: types.EDIT,
+        payload: {
+          ...value
+        }
+      })
     }
     else {
-      value.num = 1
-      let newCardData = [...cardData, ...[value]]
-      this.setState({ count: this.state.count + 1, cardData: newCardData })
+      this.setState({ count: this.state.count + 1 })
+      store.dispatch({
+        types: types.EDIT,
+        payload: {
+          id: index
+        }
+      })
     }
   }
 
@@ -58,7 +73,7 @@ export default class Home extends Component {
 
   render() {
     let { shirt, carousel, shirtg, shoes, categoryIcon } = data
-    let { count, cardData } = this.state
+    let { count } = this.state
     return (
       <SafeAreaView>
         <View style={style.header}>
@@ -68,7 +83,7 @@ export default class Home extends Component {
           </View>
           <View style={{ display: 'flex', flexDirection: 'row' }}>
             <TouchableOpacity><FontAwesome name='bell' size={17} color='white' style={{ paddingRight: 8, paddingTop: 4 }} /></TouchableOpacity>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate(navigationStrings.CART, { data: cardData })}>{count ? <Text style={style.cart}>{this.state.count}</Text> : null}<FontAwesome name='shopping-cart' size={20} color='white' style={{ paddingRight: 13 }} /></TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate(navigationStrings.CART)}>{count ? <Text style={style.cart}>{this.state.count}</Text> : null}<FontAwesome name='shopping-cart' size={20} color='white' style={{ paddingRight: 13 }} /></TouchableOpacity>
           </View>
         </View>
 
@@ -131,6 +146,18 @@ export default class Home extends Component {
 }
 
 
+const mapStateToProps = state => {
+
+  return (
+    {
+      cardData: state.shopping.cardData
+    }
+  )
+}
+
+export default connect(mapStateToProps)(Home)
+
+
 const style = StyleSheet.create({
   header: {
     paddingTop: 40,
@@ -141,7 +168,7 @@ const style = StyleSheet.create({
     height: 75,
     paddingBottom: 0,
     backgroundColor: '#1493ff',
-    fontFamily: 'Silent Reaction'
+    fontFamily: fontFamily.futuraBook
   },
   searchSection: {
     display: 'flex',

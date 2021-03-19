@@ -1,10 +1,7 @@
 import store from '../store';
-import {setUserData, apiPost, apiGet, clearUserData} from '../../utils/utils';
 import types from '../types';
-import {
-  LOGIN_API,
-  SIGNUP_API
-} from '../../config/urls.js';
+import { apiGet, apiPost, clearUserData, setUserData } from '../../utils/utils';
+import { LOGIN, SIGNUP } from '../../config/urls';
 const {dispatch} = store;
 
 const saveUserData = (data) => {
@@ -35,7 +32,7 @@ export const updateInternetConnection = (data) => {
 export const login = (data) => {
   console.log(data, 'the geivn dart');
   return new Promise((resolve, reject) => {
-    apiPost(LOGIN_API, data)
+    apiPost(LOGIN, data)
       .then((res) => {
         saveUserData(res.data);
         setUserData(res.data).then((suc) => {
@@ -51,7 +48,7 @@ export const login = (data) => {
 export const signUp = (data) => {
   console.log(data, 'the geiv ndart');
   return new Promise((resolve, reject) => {
-    apiPost(SIGNUP_API, data)
+    apiPost(SIGNUP, data)
       .then((res) => {
         saveUserData(res.data);
         setUserData(res.data).then((suc) => {

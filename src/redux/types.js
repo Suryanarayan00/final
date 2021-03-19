@@ -4,5 +4,7 @@ export default {
   CLEAR_REDUX_STATE: 'CLEAR_REDUX_STATE',
   APP_DATA: 'APP_DATA',
   NO_INTERNET: "NO_INTERNET",
-  UPDATE_LOC:'UPDATE_LOC'
+  UPDATE_LOC:'UPDATE_LOC',
+  ADD: 'addToCart',
+  EDIT: 'editCart',
 };

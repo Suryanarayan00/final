@@ -3,22 +3,19 @@ import { View, Image, Button, TouchableOpacity, Text, SafeAreaView, StyleSheet }
 import { ScrollView } from "react-native-gesture-handler";
 import CartCard from "../../../Components/CartCard";
 import imagePath from "../../../constants/imagePath";
+import {connect} from 'react-redux';
+import store from "../../../redux/store";
 
+class Cart extends Component {
 
-export default class Cart extends Component {
 
     state = { price: 0, item: 0 }
     render() {
+        let {getState} = store;
         let { price, item } = this.state
-        var cardData = []
-        if (this.props.route.params && this.props.route.params.data) {
-            cardData = this.props.route.params.data
-            for (let i = 0; i < cardData.length; i++) {
-                item = item + cardData[i].num
-                price = cardData[i].discountPrice * cardData[i].num + price
-            }
-        }
-
+        // let {cardData} = getState();
+        
+        
         let increment = (id) => {
             let index = cardData.findIndex((value) => value.id == id)
             cardData[index].num = cardData[index].num + 1
@@ -75,6 +72,17 @@ export default class Cart extends Component {
     }
 }
 
+
+const mapStateToProps = state => {
+
+    return (
+      {
+        cardData: state.shopping.cardData
+      }
+    )
+  }
+  
+  export default connect(mapStateToProps)(Cart)
 
 
 
