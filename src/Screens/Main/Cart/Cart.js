@@ -5,15 +5,17 @@ import CartCard from "../../../Components/CartCard";
 import imagePath from "../../../constants/imagePath";
 import {connect} from 'react-redux';
 import store from "../../../redux/store";
+import data from "../../../constants/data";
 
 class Cart extends Component {
 
 
     state = { price: 0, item: 0 }
     render() {
-        let {getState} = store;
+        // let {getState} = store;
         let { price, item } = this.state
         // let {cardData} = getState();
+        let cartData = data.shirtg
         
         
         let increment = (id) => {
